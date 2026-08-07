@@ -1,0 +1,150 @@
+[build-system]
+requires = ["setuptools", "setuptools_scm[toml]"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rms-gravity"
+dynamic = ["version"]
+description = "Gravity fields of oblate planets: orbital frequencies, resonances, and orbital elements"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24"
+]
+license = {text = "Apache-2.0"}
+authors = [
+  {name = "Robert S. French", email = "rfrench@seti.org"}
+]
+maintainers = [
+  {name = "Robert S. French", email = "rfrench@seti.org"}
+]
+keywords = ["gravity", "oblate", "planet", "ring", "orbit", "astronomy",
+            "mean motion", "precession", "Lindblad resonance", "orbital elements"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Natural Language :: English",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Astronomy",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Utilities",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: Microsoft :: Windows"
+]
+
+[project.urls]
+Homepage = "https://github.com/SETI/rms-gravity"
+Documentation = "https://rms-gravity.readthedocs.io/en/latest"
+Repository = "https://github.com/SETI/rms-gravity"
+Source = "https://github.com/SETI/rms-gravity"
+Issues = "https://github.com/SETI/rms-gravity/issues"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
+testpaths = ["tests"]
+addopts = ["-n", "auto", "--cov=src", "--strict-markers", "--strict-config"]
+markers = []
+filterwarnings = ["error"]
+
+[tool.setuptools]
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"gravity" = ["py.typed", "*.pyi"]
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+write_to = "src/gravity/_version.py"
+
+[project.optional-dependencies]
+dev = [
+  "rms-gravity",
+  "coverage>=7.0",
+  # "mypy>=1.0",
+  "pymarkdownlnt>=0.9.35",
+  "pytest>=7.0",
+  "pytest-cov>=4.0",
+  "pytest-xdist>=3.8.0",
+  "ruff>=0.8",
+  "bandit[toml]>=1.8",
+  "pyroma>=4.2",
+  "vulture>=2.14",
+  "rms-gravity[docs]",
+]
+docs = [
+  "myst-parser",
+  "sphinx>=7",
+  "sphinxcontrib-mermaid",
+  "sphinx-rtd-theme",
+]
+
+# Tool configuration
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ["gravity"]
+omit = ["tests/*", "_version.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "raise NotImplementedError",
+]
+fail_under = 90
+
+[tool.mypy]
+strict = true
+disallow_subclassing_any = false
+
+[[tool.mypy.overrides]]
+module = "gravity._version"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# module = ["gravity.*"]
+# ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint]
+# Explicit rule set (recommended for library projects). Categories:
+# E, W = pycodestyle errors/warnings; F = Pyflakes; I = isort; UP = pyupgrade;
+# B = bugbear; SIM = simplify; C4 = comprehensions; A = builtins (no shadowing);
+# N = pep8-naming; PT = pytest-style; RUF = Ruff-specific (e.g. unused noqa).
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "A", "N", "PT", "RUF"]
+# PT011 - pytest.raises is too broad.
+# SIM105 - Use contextlib.suppress for suppressions.
+# SIM108 - Use ternary operator for simple if/else.
+extend-ignore = ["PT011", "SIM105", "SIM108"]
+
+[tool.pymarkdown.plugins.md013]
+# Line length (disable so README/CONTRIBUTING can use longer lines).
+enabled = false
+
+[tool.pymarkdown.plugins.md033]
+# Inline HTML (e.g. <br>) allowed in Markdown.
+enabled = false
+
+[tool.bandit]
+exclude_dirs = ["tests", "venv", ".venv"]
+targets = ["src"]
+
+[tool.vulture]
+paths = ["src"]
+exclude = ["tests/"]
+min_confidence = 70
