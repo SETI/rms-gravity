@@ -1,7 +1,6 @@
 # rms-gravity
 
 <!-- pyml disable MD025 -->
-
 [![GitHub release; latest by date](https://img.shields.io/github/v/release/SETI/rms-gravity)](https://github.com/SETI/rms-gravity/releases)
 [![GitHub Release Date](https://img.shields.io/github/release-date/SETI/rms-gravity)](https://github.com/SETI/rms-gravity/releases)
 [![Test Status](https://img.shields.io/github/actions/workflow/status/SETI/rms-gravity/run-tests.yml?branch=main)](https://github.com/SETI/rms-gravity/actions)
@@ -64,7 +63,7 @@ ready-made fields for the Sun, the planets, and the major satellites.
 
 # Installation
 
-`rms-gravity` requires Python 3.10 or later and depends only on NumPy. Install it
+`rms-gravity` requires Python 3.11 or later and depends only on NumPy. Install it
 from PyPI:
 
 ```sh

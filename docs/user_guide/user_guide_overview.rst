@@ -41,7 +41,7 @@ Predefined fields for the Sun, planets, and major satellites are described in
 Installation
 ============
 
-The package supports Python 3.10 and later and depends only on NumPy:
+The package supports Python 3.11 and later and depends only on NumPy:
 
 .. code-block:: sh
 
