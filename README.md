@@ -64,7 +64,7 @@ ready-made fields for the Sun, the planets, and the major satellites.
 
 # Installation
 
-`rms-gravity` requires Python 3.10 or later and depends only on NumPy. Install it
+`rms-gravity` requires Python 3.11 or later and depends only on NumPy. Install it
 from PyPI:
 
 ```sh
